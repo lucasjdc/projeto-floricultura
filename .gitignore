@@ -1,0 +1,16 @@
+# Dependências do Composer
+/vendor/
+
+# Arquivos de configuração
+.env
+
+# Logs
+*.log
+
+# Cache
+/cache/
+/tmp/
+
+# Configuração do sistema
+.DS_Store
+Thumbs.db
