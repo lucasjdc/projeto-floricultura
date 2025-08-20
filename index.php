@@ -20,7 +20,10 @@ $estoque = json_decode(file_get_contents("estoque.json"), true);
             <tr>
                 <td><?= $produto['nome'] ?></td>
                 <td><?= $produto['quantidade'] ?></td>
-                <td><a href="remover.php?i=<?= $i ?>">Remover</a></td>
+                <td>
+                    <a href="vender.php?i=<?= $i ?>">Vender 1</a> |
+                    <a href="remover.php?i=<?= $i ?>">Remover</a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>
