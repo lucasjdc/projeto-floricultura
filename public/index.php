@@ -23,7 +23,6 @@ $estoque = carregarEstoque();
                 <td><?= $produto['nome'] ?></td>
                 <td><?= $produto['quantidade'] ?></td>
                 <td>
-                    <a href="vender.php?i=<?= $i ?>">Vender 1</a> |
                     <a href="atualizar.php?i=<?= $i ?>">Atualizar Estoque</a> |
                     <a href="remover.php?i=<?= $i ?>">Remover Produto</a>
                 </td>
