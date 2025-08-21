@@ -18,8 +18,10 @@ if (!isset($estoque[$i])) {
 $produto = $estoque[$i];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $novaQuantidade = intval($_POST['quantidade']);
-    $estoque[$i]['quantidade'] = $novaQuantidade;
+    $estoque[$i]['nome'] = $_POST['nome'];
+    $estoque[$i]['quantidade'] = intval($_POST['quantidade']);
+    $estoque[$i]['preco'] = floatval($_POST['preco']);
+
     salvarEstoque($estoque);
     header("Location: index.php");
     exit;
@@ -34,10 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Atualizar Estoque - <?= htmlspecialchars($produto['nome']) ?></h1>
+    <h1>Editar Produto - <?= htmlspecialchars($produto['nome']) ?></h1>
     <form method="POST">
-        Quantidade atual: <?= $produto['quantidade'] ?><br><br>
-        Nova quantidade: <input type="number" name="quantidade" required><br><br>
+        Nome: <input type="text" name="nome" value="<?= htmlspecialchars($produto['nome']) ?>" required><br><br>
+        Quantidade: <input type="number" name="quantidade" value="<?= $produto['quantidade'] ?>" required><br><br>
+        Preço (R$): <input type="number" step="0.01" name="preco" value="<?= $produto['preco'] ?>" required><br><br>
         <button type="submit">Salvar</button>
     </form>
     <br><a href="index.php">Voltar</a>
