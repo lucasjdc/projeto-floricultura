@@ -7,6 +7,7 @@ $estoque = carregarEstoque();
 <head>
     <meta charset="UTF-8">
     <title>🌸 Floricultura - Estoque</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>🌸 Floricultura - Controle de Estoque</h1>
