@@ -1,6 +1,5 @@
 <?php
-// Esse arquivo abre um formulário para digitar a nova quantidade do produto
-$estoque = json_decode(file_get_contents("estoque.json"), true);
+require_once __DIR__ . '/../includes/funcoes.php';
 
 if (!isset($_GET['i'])) {
     header("Location: index.php");
@@ -8,17 +7,24 @@ if (!isset($_GET['i'])) {
 }
 
 $i = intval($_GET['i']);
-$produto = $estoque[$i];
+$estoque = carregarEstoque();
 
-// Se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $novaQuantidade = intval($_POST['quantidade']);
-    $estoque[$i]['quantidade'] = $novaQuantidade;
-
-    file_put_contents("estoque.json", json_encode($estoque, JSON_PRETTY_PRINT));
+// Verifica se o índice existe
+if (!isset($estoque[$i])) {
     header("Location: index.php");
     exit;
 }
+
+$produto = $estoque[$i];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $novaQuantidade = intval($_POST['quantidade']);
+    $estoque[$i]['quantidade'] = $novaQuantidade;
+    salvarEstoque($estoque);
+    header("Location: index.php");
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -27,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Atualizar Estoque</title>
 </head>
 <body>
-    <h1>Atualizar Estoque - <? $produto['nome'] ?></h1>
+    <h1>Atualizar Estoque - <?= htmlspecialchars($produto['nome']) ?></h1>
     <form method="POST">
         Quantidade atual: <?= $produto['quantidade'] ?><br><br>
         Nova quantidade: <input type="number" name="quantidade" required><br><br>

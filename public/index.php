@@ -1,5 +1,6 @@
 <?php
-$estoque = json_decode(file_get_contents("estoque.json"), true);
+require_once __DIR__ . '/../includes/funcoes.php';
+$estoque = carregarEstoque();
 ?>
 <!DOCTYPE html>
 <html land="pt-BR">

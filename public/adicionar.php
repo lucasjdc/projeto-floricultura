@@ -1,13 +1,15 @@
 <?php
+require_once __DIR__ . '/../includes/funcoes.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $estoque = json_decode(file_get_contents("estoque.json"), true);
+    $estoque = carregarEstoque();
 
     $estoque[] = [
         "nome" => $_POST['nome'],
         "quantidade" => intval($_POST['quantidade'])
     ];
 
-    file_put_contents("estoque.json", json_encode($estoque, JSON_PRETTY_PRINT));
+    salvarEstoque($estoque);
     header("Location: index.php");
 }
 ?>
