@@ -1,4 +1,18 @@
-# Ignorar arquivos compilados do Python
+# Ambiente virtual
+.venv/
+venv/
+ENV/
+env/
+
+# Cache do Python
 __pycache__/
 *.pyc
-*.json
+*.pyo
+*.pyd
+
+# Arquivos de banco/dados locais
+produtos.json
+
+# Configurações locais (opcionais)
+*.log
+*.sqlite3

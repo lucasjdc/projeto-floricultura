@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import json
 from datetime import datetime
+from produto import Produto
 
 def abrir_cadastro(parent):
     cadastro = tk.Toplevel(parent)
@@ -41,28 +42,18 @@ def abrir_cadastro(parent):
         data = entry_data.get().strip()
         desc = entry_desc.get().strip()
 
-        # Validação básica
-        if not nome or not qtd or not preco or not data:
-            messagebox.showerror("Erro", "Preenha todos os campos obrigatórios!")
-            return
-        
         try:
-            qtd = int(qtd)
-            preco = float(preco)
-            datetime.strptime(data, "%d/%m/%Y") # Valida formato da data
-        except ValueError:
-            messagebox.showerror("Erro", "Quantidade deve ser número inteiro, preço número decimal e data no formato dd/mm/aaaa.")
-            return
+            produto = Produto(
+                nome=nome,
+                quantidade=qtd,
+                preco=preco,
+                data=data,
+                descricao=desc if desc else None                
+            )
         
-        # Criar dicionário do produto
-        produto = {
-            "nome": nome,
-            "quantidade": qtd,
-            "preco": preco,
-            "data":data
-        }
-        if desc:
-            produto["descricao"] = desc
+        except Exception as e:
+            messagebox.showerror("Erro", str(e))
+            return
 
         # Salvar no arquivo JSON
         try:
@@ -71,7 +62,7 @@ def abrir_cadastro(parent):
         except (FileNotFoundError, json.JSONDecodeError):
             dados = []
         
-        dados.append(produto)
+        dados.append(produto.dict())
 
         with open("produtos.json", "w", encoding="utf-8") as f:
             json.dump(dados, f, indent=4, ensure_ascii=False)
