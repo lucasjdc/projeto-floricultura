@@ -1,5 +1,6 @@
 import tkinter as tk
-from cadasdro_produto import abrir_cadastro # importa a função do outro aquivo
+from cadasdro_produto import abrir_cadastro
+from listar_produtos import abrir_lista_produtos
 
 
 def main():
@@ -16,6 +17,10 @@ def main():
     # Botão Cadastro
     btn_cadastro = tk.Button(root, text="Cadastro", command=lambda: abrir_cadastro(root))
     btn_cadastro.pack(pady=10)
+
+    # Botão Listar Produtos
+    btn_listar = tk.Button(root, text="Listar Produtos", command=lambda: abrir_lista_produtos(root))
+    btn_listar.pack(pady=10)
 
     # Botão Fechar
     btn_fechar = tk.Button(root, text="Fechar", command=root.destroy)
